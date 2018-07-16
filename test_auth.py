@@ -1,3 +1,4 @@
+import pytest
 def func(x):
     assert True
 
