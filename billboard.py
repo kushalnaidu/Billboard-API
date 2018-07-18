@@ -83,7 +83,10 @@ class BillboardData:
         for value in data:
             print("{:^40} - {:^40}".format(value[0],value[1]))
         if self.csv is True:
-            pass
+            print(True)
+            with open('BillboardData.csv', 'w', newline='') as f:
+                writer = csv.writer(f)
+                writer.writerows(data)
         
 if __name__ == "__main__":
     x = BillboardData(date = '2018-1-1',csv = True)
