@@ -38,6 +38,7 @@ class BillboardData:
         self.csv = csv
         self.reset_csv = reset_csv
         self.name_of_csv = name_of_csv
+        self.recorded_data = []
         if date is None:
             self.date = str(datetime.today()-timedelta(days=7)).split()[0]
         else:
@@ -100,25 +101,30 @@ class ArchivedYearData:
         self.start_position = start_position
         self.end_position = end_position
         self.csv = csv
+        self.considered_dates = []
         name_of_file = "Billboard_"+str(year)+".csv"
         if(os.path.exists(name_of_file)):
             os.remove(name_of_file)
         if(year == datetime.now().year):
             date = datetime(year,1,1)
             while(date.month < datetime.now().month):
+                self.considered_dates.append(date)
                 print("date: {}".format(str(date).split()[0]))
                 BillboardData(date = str(date).split()[0],position = position,start_position = 1, end_position = 100,csv = self.csv,name_of_csv = name_of_file, reset_csv = False)
                 date += timedelta(days = 7)
             while(date <= datetime.today()-timedelta(days=7)):
+                self.considered_dates.append(date)
                 BillboardData(date = str(date).split()[0],position = position,start_position = 1, end_position = 100,csv = self.csv,name_of_csv = name_of_file, reset_csv = False)
                 date += timedelta(days = 7)
         else:
             input_year = year
             date = datetime(year,1,1)
             while(year == date.year):
+                self.considered_dates.append(date)
                 print("date: {}".format(str(date).split()[0]))
                 BillboardData(date = str(date).split()[0],position = position,start_position = 1, end_position = 100,csv = self.csv,name_of_csv = name_of_file, reset_csv = False)
                 date += timedelta(days = 7)
+                self.considered_dates.append(date)
 if __name__ == "__main__":
-    x = ArchivedYearData(year = 2018,csv = True)
-    
+    x = BillboardData()
+    print(x.date)
