@@ -117,7 +117,6 @@ class ArchivedYearData:
                 BillboardData(date = str(date).split()[0],position = position,start_position = 1, end_position = 100,csv = self.csv,name_of_csv = name_of_file, reset_csv = False)
                 date += timedelta(days = 7)
         else:
-            input_year = year
             date = datetime(year,1,1)
             while(year == date.year):
                 self.considered_dates.append(date)
